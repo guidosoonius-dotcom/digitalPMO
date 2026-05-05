@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Phase {
+  id        String  @id @default(cuid())
+  name      String
+  startWeek Int
+  startYear Int
+  endWeek   Int
+  endYear   Int
+  color     String
+  order     Int
+  tasks     Task[]
+}
+
+model Task {
+  id            String    @id @default(cuid())
+  projectNumber String
+  description   String
+  owner         String    @default("")
+  phaseId       String?
+  phase         Phase?    @relation(fields: [phaseId], references: [id])
+  isGroupRow    Boolean   @default(false)
+  status        String    @default("not_started")
+  barType       String    @default("task")
+  startWeek     Int       @default(0)
+  startYear     Int       @default(2026)
+  endWeek       Int       @default(0)
+  endYear       Int       @default(2026)
+  isMilestone   Boolean   @default(false)
+  sortOrder     Int       @default(0)
+  updatedAt     DateTime  @updatedAt
+  updatedBy     String?
+  bars          TaskBar[]
+  comments      Comment[]
+}
+
+model TaskBar {
+  id        String @id @default(cuid())
+  taskId    String
+  task      Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  startWeek Int
+  startYear Int
+  endWeek   Int
+  endYear   Int
+  barType   String @default("task")
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  taskId    String
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  text      String
+  author    String
+  createdAt DateTime @default(now())
+}

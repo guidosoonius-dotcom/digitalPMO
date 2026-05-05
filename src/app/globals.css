@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+:root {
+  --bar-task: #3B82F6;
+  --bar-task-light: #DBEAFE;
+  --bar-critical-milestone: #F97316;
+  --bar-holiday: #86EFAC;
+  --bar-holiday-bg: #DCFCE7;
+  --bar-decision: #F9A8D4;
+  --bar-decision-bg: #FCE7F3;
+
+  --status-on-track: #22C55E;
+  --status-at-risk: #F59E0B;
+  --status-delayed: #EF4444;
+  --status-completed: #9CA3AF;
+  --status-not-started: #E5E7EB;
+
+  --sidebar-width: 240px;
+  --gantt-left-width: 520px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.gantt-scroll-container {
+  overflow-x: auto;
+  overflow-y: visible;
+  scroll-behavior: smooth;
+}
+
+.gantt-scroll-container::-webkit-scrollbar {
+  height: 6px;
+}
+
+.gantt-scroll-container::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.gantt-scroll-container::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
